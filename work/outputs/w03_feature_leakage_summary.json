@@ -1,0 +1,39 @@
+{
+  "assignment": "ML-05 Feature Vector and Leakage/Privacy Check",
+  "dataset": "data\\raw\\content_refresh_anonymized.csv",
+  "target": "ctr",
+  "input_rows": 30000,
+  "rows_with_target": 30000,
+  "candidate_feature_count": 36,
+  "numeric_feature_count": 27,
+  "categorical_feature_count": 9,
+  "encoded_feature_count": 62,
+  "training_rows": 24000,
+  "test_rows": 6000,
+  "known_forbidden_fields": [
+    "clicks_90d",
+    "client_id",
+    "content_id",
+    "ctr",
+    "is_declining_label",
+    "model_used",
+    "provider_used",
+    "target",
+    "trend_direction",
+    "trend_pct"
+  ],
+  "forbidden_fields_in_features": [],
+  "preprocessing_fitted_on_training_data_only": true,
+  "temporal_availability_fully_verified": false,
+  "limitations": [
+    "The demonstration split is random rather than client-grouped.",
+    "Name-based leakage checks cannot prove temporal safety.",
+    "Feature-window timestamps must be checked against the prediction moment.",
+    "The selected target is observed CTR, not causal improvement after an action."
+  ],
+  "exports": [
+    "work/outputs/w03_feature_notes.csv",
+    "work/outputs/w03_leakage_audit.csv",
+    "work/outputs/w03_excluded_features.csv"
+  ]
+}

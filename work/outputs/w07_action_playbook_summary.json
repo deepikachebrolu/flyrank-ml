@@ -1,0 +1,62 @@
+{
+  "assignment": "ML-10 Content Action Playbook",
+  "project_lane": "CTR / Engagement Opportunity Scoring",
+  "dataset": "data\\raw\\content_refresh_anonymized.csv",
+  "input_rows": 30000,
+  "queue_rows": 30000,
+  "unique_clients": 32,
+  "ranking_method": "Transparent rule-based priority index; not a model prediction.",
+  "thresholds": {
+    "high_impressions_quantile": 0.75,
+    "high_impressions_threshold": 3615.25,
+    "low_ctr_quantile": 0.25,
+    "low_ctr_threshold": 0.0,
+    "stale_content_days": 180,
+    "low_engagement_quantile": 0.25,
+    "low_engagement_threshold": 0.0
+  },
+  "priority_weights": {
+    "HIGH_IMPRESSIONS_LOW_CTR": 5,
+    "STALE_HIGH_VISIBILITY": 4,
+    "VISIBLE_POSITION_4_TO_20": 3,
+    "LOW_RELATIVE_ENGAGEMENT": 2,
+    "STALE_CONTENT_REVIEW": 1,
+    "NO_PRIORITY_RULE_MATCH": 0
+  },
+  "action_counts": {
+    "ENGAGEMENT_REVIEW": 19984,
+    "RANKING_REVIEW": 5012,
+    "MONITOR": 4842,
+    "CTR_REVIEW": 146,
+    "FRESHNESS_REVIEW": 16
+  },
+  "reason_code_counts": {
+    "LOW_RELATIVE_ENGAGEMENT": 19984,
+    "VISIBLE_POSITION_4_TO_20": 5012,
+    "NO_PRIORITY_RULE_MATCH": 4842,
+    "HIGH_IMPRESSIONS_LOW_CTR": 146,
+    "STALE_HIGH_VISIBILITY": 8,
+    "STALE_CONTENT_REVIEW": 8
+  },
+  "intended_use": "Human-reviewed content maintenance and investigation queue.",
+  "limits": [
+    "Priority scores are heuristic ranks, not probabilities.",
+    "The queue does not predict CTR uplift or causal impact.",
+    "Relative thresholds depend on this dataset's distribution.",
+    "Missing or noisy metrics may affect prioritization.",
+    "Content age alone does not prove content decay.",
+    "No content changes are automated."
+  ],
+  "human_review_required": true,
+  "production_ready": false,
+  "monitoring_triggers": [
+    "Review priority thresholds when the data distribution changes.",
+    "Investigate missingness or schema changes.",
+    "Compare post-action outcomes with a documented baseline.",
+    "Revalidate the model before considering model-based ranking."
+  ],
+  "exports": {
+    "ranked_queue": "work\\outputs\\w07_ranked_action_queue.csv",
+    "action_distribution_figure": "work\\outputs\\w07_action_priority_distribution.png"
+  }
+}
